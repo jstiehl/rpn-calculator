@@ -6,7 +6,7 @@
   },
   "name": "rpn-calculator",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "Calculator/index.js",
   "repository": "https://github.com/jstiehl/rpn-calculator.git",
   "author": "James Stiehl <jstiehl@gmail.com>",
   "license": "MIT"
