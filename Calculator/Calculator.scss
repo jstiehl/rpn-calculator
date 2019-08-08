@@ -1,0 +1,38 @@
+.calculator {
+  margin: 0 auto;
+  margin-top: 25px;
+  width: 450px;
+  height: 520px;
+  border: 1px solid black;
+  background-color: grey;
+  .stack-area {
+    border: 1px solid black;
+    background-color: yellow;
+    width: 80%;
+    margin: 0 auto;
+    height: 100px;
+    .stack-item {
+      text-align: right;
+      margin-right: 10px;
+      height: 20px;
+    }
+  }
+  .pad-area {
+    display: grid;
+    grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+    border: 1px solid black;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 15px;
+    height: 300px;
+    .number-key {
+      border: 1px solid white;
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+}
