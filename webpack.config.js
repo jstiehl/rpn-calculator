@@ -21,8 +21,9 @@ module.exports = {
   },
   output: {
     path: __dirname + '/build',
-    filename: '[name].build.js',
+    filename: 'index.js',
     publicPath: '/',
+    libraryTarget: 'commonjs2'
   },
   plugins: [
     new webpack.DefinePlugin({
