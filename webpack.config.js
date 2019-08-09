@@ -25,11 +25,6 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
-    // new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'React App Container',
-      template: path.join(__dirname, '../app/index.html')
-    }),
     new webpack.DefinePlugin({
       'process.env': env,
     }),
