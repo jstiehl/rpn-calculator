@@ -11,6 +11,10 @@
     width: 80%;
     margin: 0 auto;
     height: 100px;
+    &-reg {
+      height: 50px;
+      margin-bottom: 50px;
+    }
     .stack-item {
       text-align: right;
       margin-right: 10px;
@@ -34,5 +38,17 @@
       justify-content: center;
       cursor: pointer;
     }
+  }
+  button {
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 25px;
+    width: 90px;
+    margin-left: 45px;
   }
 }

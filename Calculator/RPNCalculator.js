@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import './Calculator.scss'
 
-const NUMBERS = ["7","8","9","/","4","5","6","x","1","2","3","-","0",".","=","+"]
+const NUMBERS = ["7","8","9","/","4","5","6","x","1","2","3","-","0",".","enter","+"]
 const OPERATORS = ["+","-","x","/"]
 
-const Calculator = () => {
+const RPNCalculator = () => {
   const [stack, setStack] = useState([])
-  const [operation, setOperation] = useState(null)
-
-  const handleOperator = () => {
+  const handleOperator = n => {
     let newStack = [...stack]
     if(!newStack[newStack.length-1]) {
       newStack.splice(newStack.length-1)
@@ -18,47 +16,50 @@ const Calculator = () => {
       return newStack
     }
     let result
-    switch(operation) {
+    switch(n) {
       case "+":
         //add last two numbers in stack
         result = parseFloat(newStack[newStack.length-2]) + parseFloat(newStack[newStack.length-1])
+        newStack.splice(newStack.length-2,2,result.toString())
+        newStack.push('')
         break;
       case "-":
         //subtract last two numbers in stack
         result = parseFloat(newStack[newStack.length-2]) - parseFloat(newStack[newStack.length-1])
+        newStack.splice(newStack.length-2,2,result.toString())
+        newStack.push('')
         break;
       case "/":
         //divide last two numbers in stack
         result = parseFloat(newStack[newStack.length-2])/parseFloat(newStack[newStack.length-1])
+        newStack.splice(newStack.length-2,2,result.toString())
+        newStack.push('')
         break;
       case "x":
         //multiply last two numbers in stack
         result = parseFloat(newStack[newStack.length-2]) * parseFloat(newStack[newStack.length-1])
+        newStack.splice(newStack.length-2,2,result.toString())
+        newStack.push('')
         break;
-      default:
-        //do nothing
     }
-    newStack = [result.toString()]
     return newStack
   }
 
   const updateDisplay = (n,e) => {
     e.preventDefault();
     let newStack
-    if(n === "=") {
+    if(OPERATORS.includes(n)) {
       //this will be an operation
-      newStack = handleOperator()
-      setOperation(null)
+      newStack = handleOperator(n)
       // return
     } else if(!stack.length) {
       newStack=[n]
-    } else if(OPERATORS.includes(n)) {
-      newStack = [...stack]
-      newStack.push('')
-      setOperation(n)
-    } else {
+    } else if(n !== 'enter') {
       newStack = [...stack]
       newStack[newStack.length-1] = newStack[newStack.length-1] + n
+    } else {
+      newStack = [...stack]
+      newStack.push('')
     }
 
     setStack(newStack)
@@ -66,11 +67,11 @@ const Calculator = () => {
 
   return (
     <div className="calculator">
-      <h3>Calculator</h3>
-      <div className="stack-area stack-area-reg">
+      <h3>RPN Calculator</h3>
+      <div className="stack-area">
         {renderStack(stack)}
       </div>
-      <button className="number-key" onClick={e=>{ 
+      <button onClick={e=>{ 
         e.preventDefault()
         setStack([])
       }}>Clear</button>
@@ -82,7 +83,9 @@ const Calculator = () => {
 }
 
 const renderStack = stackArray => {
-  return <div className="stack-item">{stackArray[stackArray.length-1] || stackArray[0]}</div>
+  return stackArray.map((number, i) => {
+    return <div key={i} className="stack-item">{number}</div>
+  })
 }
 
 const renderNumberPad = handler => {
@@ -95,4 +98,4 @@ const renderNumberPad = handler => {
   })
 }
 
-export default Calculator
+export default RPNCalculator

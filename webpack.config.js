@@ -9,7 +9,7 @@ const styles = require('./loaders/styles')
 const images = require('./loaders/images')
 
 const env = {
-  NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+  NODE_ENV: JSON.stringify("development")
 }
 
 module.exports = {
@@ -22,13 +22,9 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     filename: 'index.js',
-    publicPath: '/',
     libraryTarget: 'commonjs2'
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': env,
-    }),
     new MiniCssExtractPlugin({
       filename: 'styles.css',
       chunkFilename: '[id].css',
@@ -41,10 +37,5 @@ module.exports = {
       images,
     ],
   },
-  optimization: {
-    usedExports: true,
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+  externals: { 'react': 'commonjs react' }
 }

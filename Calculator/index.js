@@ -1,1 +1,2 @@
-export { default } from './Calculator';
+export { default as RPN } from './RPNCalculator';
+export { default as Calculator } from './Calculator'
